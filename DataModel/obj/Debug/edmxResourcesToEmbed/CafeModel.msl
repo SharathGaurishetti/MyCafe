@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyCafeModelStoreContainer" CdmEntityContainer="MyCafeEntities">
+    <EntitySetMapping Name="Prices">
+      <EntityTypeMapping TypeName="MyCafeModel.Price">
+        <MappingFragment StoreEntitySet="Price">
+          <ScalarProperty Name="price_id" ColumnName="price_id" />
+          <ScalarProperty Name="price1" ColumnName="price" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="MyCafeModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price_id" ColumnName="price_id" />
+          <ScalarProperty Name="type_id" ColumnName="type_id" />
+          <ScalarProperty Name="image_path" ColumnName="image_path" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductStates">
+      <EntityTypeMapping TypeName="MyCafeModel.ProductState">
+        <MappingFragment StoreEntitySet="ProductState">
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTypes">
+      <EntityTypeMapping TypeName="MyCafeModel.ProductType">
+        <MappingFragment StoreEntitySet="ProductType">
+          <ScalarProperty Name="product_type_id" ColumnName="product_type_id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

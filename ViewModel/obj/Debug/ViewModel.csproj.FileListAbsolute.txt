@@ -1,0 +1,4 @@
+C:\My VS Projects\MyCafe\MyCafe\ViewModel\bin\Debug\ViewModel.dll
+C:\My VS Projects\MyCafe\MyCafe\ViewModel\bin\Debug\ViewModel.pdb
+C:\My VS Projects\MyCafe\MyCafe\ViewModel\obj\Debug\ViewModel.dll
+C:\My VS Projects\MyCafe\MyCafe\ViewModel\obj\Debug\ViewModel.pdb

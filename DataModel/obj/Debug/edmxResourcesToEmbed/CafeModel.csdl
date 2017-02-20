@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyCafeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Price">
+    <Key>
+      <PropertyRef Name="price_id" />
+    </Key>
+    <Property Name="price_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="price1" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Price" FromRole="Price" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="price_id" Type="Int32" Nullable="false" />
+    <Property Name="type_id" Type="Int32" Nullable="false" />
+    <Property Name="image_path" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="modified_by" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="modified_date" Type="DateTime" Precision="0" />
+    <Property Name="state_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Price" Relationship="Self.FK_Product_Price" FromRole="Product" ToRole="Price" />
+    <NavigationProperty Name="ProductType" Relationship="Self.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
+  </EntityType>
+  <EntityType Name="ProductState">
+    <Key>
+      <PropertyRef Name="state_id" />
+    </Key>
+    <Property Name="state_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="product_type_id" />
+    </Key>
+    <Property Name="product_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_Product_Price">
+    <End Role="Price" Type="Self.Price" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Price">
+        <PropertyRef Name="price_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="price_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductType">
+    <End Role="ProductType" Type="Self.ProductType" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductType">
+        <PropertyRef Name="product_type_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyCafeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Prices" EntityType="Self.Price" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductStates" EntityType="Self.ProductState" />
+    <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+    <AssociationSet Name="FK_Product_Price" Association="Self.FK_Product_Price">
+      <End Role="Price" EntitySet="Prices" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+      <End Role="ProductType" EntitySet="ProductTypes" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

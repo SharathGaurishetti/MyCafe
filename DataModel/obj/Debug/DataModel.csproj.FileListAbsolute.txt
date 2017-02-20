@@ -1,0 +1,9 @@
+C:\My VS Projects\MyCafe\MyCafe\DataModel\bin\Debug\DataModel.dll.config
+C:\My VS Projects\MyCafe\MyCafe\DataModel\bin\Debug\DataModel.dll
+C:\My VS Projects\MyCafe\MyCafe\DataModel\bin\Debug\DataModel.pdb
+C:\My VS Projects\MyCafe\MyCafe\DataModel\bin\Debug\EntityFramework.dll
+C:\My VS Projects\MyCafe\MyCafe\DataModel\bin\Debug\EntityFramework.SqlServer.dll
+C:\My VS Projects\MyCafe\MyCafe\DataModel\bin\Debug\EntityFramework.xml
+C:\My VS Projects\MyCafe\MyCafe\DataModel\bin\Debug\EntityFramework.SqlServer.xml
+C:\My VS Projects\MyCafe\MyCafe\DataModel\obj\Debug\DataModel.dll
+C:\My VS Projects\MyCafe\MyCafe\DataModel\obj\Debug\DataModel.pdb

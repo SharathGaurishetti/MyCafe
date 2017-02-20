@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyCafeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Price">
+    <Key>
+      <PropertyRef Name="price_id" />
+    </Key>
+    <Property Name="price_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="price_id" Type="int" Nullable="false" />
+    <Property Name="type_id" Type="int" Nullable="false" />
+    <Property Name="image_path" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="modified_by" Type="varchar" MaxLength="200" />
+    <Property Name="modified_date" Type="date" />
+    <Property Name="state_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductState">
+    <Key>
+      <PropertyRef Name="state_id" />
+    </Key>
+    <Property Name="state_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="product_type_id" />
+    </Key>
+    <Property Name="product_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="300" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Product_Price">
+    <End Role="Price" Type="Self.Price" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Price">
+        <PropertyRef Name="price_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="price_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductType">
+    <End Role="ProductType" Type="Self.ProductType" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductType">
+        <PropertyRef Name="product_type_id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyCafeModelStoreContainer">
+    <EntitySet Name="Price" EntityType="Self.Price" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductState" EntityType="Self.ProductState" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Product_Price" Association="Self.FK_Product_Price">
+      <End Role="Price" EntitySet="Price" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+      <End Role="ProductType" EntitySet="ProductType" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

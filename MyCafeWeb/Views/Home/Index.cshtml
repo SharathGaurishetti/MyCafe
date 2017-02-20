@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ViewModel.MenuViewModel>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    
+    $(document).ready(function () {
+        $('.divAddCart').on('click', function () {
+            var ProductId = parseInt($(this).closest('td').prop('id'));
+            var OldTotalAmount = $('.TotalAmount').text();
+             
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: 'Home/AddCart',
+                data: JSON.stringify({ ProductId: ProductId, TotalAmount: OldTotalAmount }),
+                success: function (data) {
+                    $('.TotalAmount').html(data)
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        });
+    });
+</script>
+<div class="panel">
+    <h1>Saharsh Cafe Shop</h1>
+</div>
+<div class="panel">
+    <div class="container">
+        <table>
+            <tr>
+                @foreach (var objItem in Model)
+            {
+
+                    <td id="@objItem.ProductId">
+                        <div class="itemImage">
+                            <div class="divImg"><img src="@objItem.ImagePath" height="150" width="150" /></div>
+                            <div class="divIName">@objItem.ProductName</div>
+                            <div class="divType hidden">@objItem.Type</div>
+                            <div class="divState hidden">@objItem.State</div>
+                        </div>
+                        <div class="itemDetails">
+                            <div class="divPrice">Price : £@objItem.Price</div>
+                        </div>
+                        <div class=" divAddCart btn btn-primary">Add To Cart</div>
+                    </td>
+                }
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="panel">
+    <div class="panel-body">
+        <div>
+            Total Amount : <div class="TotalAmount">0</div>
+        </div>
+    </div>
+</div>
+
